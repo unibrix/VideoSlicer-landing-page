@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoSlicer — Free Video Frame Extractor for macOS | First & Last Frame for AI Video</title>
+    <meta name="description" content="Free macOS video frame extractor. Extract first and last frames as PNG for AI video generation (Sora, Kling, Wan, Veo), thumbnails, and previews. No ffmpeg, no command line. Drag, drop, done.">
+    <meta name="keywords" content="video frame extractor, extract frames from video mac, first frame last frame, AI video generation, video to PNG, extract frame for Sora, Kling start end frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor, video screenshot mac, drag and drop frame extractor, image to video first frame, AI video keyframe">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <style>
+    /* Critical CSS — hero & above-fold layout */
+    :root{color-scheme:light;--blue-primary:#4F46E5;--gradient-start:#2d2b8a;--gradient-end:#7C3AED;--text-dark:#1a1a1a;--text-muted:#666;--bg-light:#f8f9fa;--bg-white:#fff;--card-bg:#fff;--card-shadow:0 4px 20px rgba(0,0,0,.08)}
+    html[data-theme="dark"]{--blue-primary:#818CF8;--gradient-start:#1a1854;--gradient-end:#402a55;--text-dark:#f0f0f0;--text-muted:#a0a0a0;--bg-light:#1c1c1e;--bg-white:#2c2c2e;--card-bg:#2c2c2e;--card-shadow:0 4px 20px rgba(0,0,0,.3);color-scheme:dark}
+    @media(prefers-color-scheme:dark){html[data-theme="system"]{--blue-primary:#818CF8;--gradient-start:#1a1854;--gradient-end:#402a55;--text-dark:#f0f0f0;--text-muted:#a0a0a0;--bg-light:#1c1c1e;--bg-white:#2c2c2e;--card-bg:#2c2c2e;--card-shadow:0 4px 20px rgba(0,0,0,.3);color-scheme:dark}}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;color:var(--text-dark);line-height:1.6;overflow-x:hidden}img{max-width:100%;height:auto}
+    .hero{min-height:100vh;background:linear-gradient(135deg,var(--gradient-start) 0%,var(--gradient-end) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;color:#fff;position:relative;overflow:hidden}
+    .hero h1{font-size:3.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em;position:relative;z-index:1}
+    .hero .tagline{font-size:1.5rem;opacity:.9;margin-bottom:.5rem;font-weight:300;position:relative;z-index:1}
+    .hero .hero-subtitle{font-size:1.1rem;opacity:.8;margin-bottom:1.5rem;font-weight:400;position:relative;z-index:1}
+    .hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,var(--bg-white));pointer-events:none;z-index:1}
+    .hero-icon{position:relative;z-index:1;margin-bottom:1.5rem;perspective:600px}.hero-icon img{width:128px;height:128px;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,.3);transition:transform .15s ease-out}
+    .download-badge{margin-top:1.5rem;position:relative;z-index:1}
+    .btn-download{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;border:none;cursor:pointer;font-size:1.1rem;font-weight:700;text-decoration:none;background:#fff;color:#2d2b8a;box-shadow:0 4px 14px rgba(0,0,0,.15);transition:transform .15s,box-shadow .15s}
+    .btn-download:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+    .btn-download svg{width:22px;height:22px}
+    .hero-note{margin-top:16px;font-size:.85rem;opacity:.75;position:relative;z-index:1}
+    .theme-toggle{position:fixed;top:.75rem;right:.75rem;z-index:100}
+    .theme-toggle-group{display:inline-flex;background:rgba(0,0,0,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:2px;gap:2px}
+    .theme-toggle-group button{background:none;border:none;padding:5px 7px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.4}
+    .theme-toggle-group button.active{background:rgba(255,255,255,.15);opacity:1}
+    .theme-toggle-group svg{width:14px;height:14px;fill:none;stroke:#f0f0f0;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .flying-emojis{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .flying-emoji{position:absolute;opacity:0;animation:flyUp linear infinite;will-change:transform,opacity}
+    @keyframes flyUp{0%{opacity:0;transform:translateY(100%) rotate(0deg)}10%{opacity:.18}90%{opacity:.18}100%{opacity:0;transform:translateY(-120%) rotate(25deg)}}
+    @media(max-width:768px){.hero{min-height:auto;padding:4rem 1.5rem}.hero h1{font-size:2.2rem}.hero .tagline{font-size:1.1rem}.hero .hero-subtitle{font-size:.95rem}.hero-icon img{width:96px;height:96px;border-radius:20px}}
+    @media(max-width:480px){.hero{padding:3rem 1rem}.hero h1{font-size:1.8rem}.hero .tagline{font-size:1rem}.btn-download{padding:14px 28px;font-size:1rem}.hero-icon img{width:80px;height:80px;border-radius:16px}}
+    </style>
+    <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('videoslicer_theme')||'system')</script>
+    <link rel="canonical" href="https://videoslicer.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="VideoSlicer — Free Video Frame Extractor for macOS | AI Video Ready">
+    <meta property="og:description" content="Extract first & last frames from any video as PNG. Perfect for AI video generation (Sora, Kling, Wan), thumbnails, and previews. Free, no ffmpeg needed.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://videoslicer.app/">
+    <meta property="og:image" content="https://videoslicer.app/images/app-icon.png">
+    <meta property="og:site_name" content="VideoSlicer">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VideoSlicer — Free Video Frame Extractor for macOS">
+    <meta name="twitter:description" content="Extract first & last frames as PNG for AI video generation, thumbnails, and previews. Free macOS app, no ffmpeg needed.">
+    <meta name="twitter:image" content="https://videoslicer.app/images/app-icon.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/app-icon.png">
+
+    <!-- Google Analytics 4 with Consent Mode -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-V2DVS3WPLG');
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://videoslicer.app/#organization",
+                "name": "VideoSlicer",
+                "url": "https://videoslicer.app",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://videoslicer.app/images/app-icon.png"
+                },
+                "sameAs": [
+                    "https://github.com/valeraOlexienko/VideoSlicer"
+                ],
+                "parentOrganization": {
+                    "@type": "Organization",
+                    "name": "Unibrix",
+                    "url": "https://unibrix.com"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://videoslicer.app/#website",
+                "url": "https://videoslicer.app",
+                "name": "VideoSlicer",
+                "description": "Free macOS app to extract first and last frames from any video file",
+                "publisher": {
+                    "@id": "https://videoslicer.app/#organization"
+                }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "@id": "https://videoslicer.app/#app",
+                "name": "VideoSlicer",
+                "description": "Free macOS video frame extractor. Extract first and last frames from any video as full-resolution PNG images. Perfect for AI video generation (Sora, Kling, Wan, Veo), thumbnails, and previews. Native SwiftUI app — no ffmpeg, no command line needed.",
+                "applicationCategory": "MultimediaApplication",
+                "operatingSystem": "macOS 14.0+",
+                "softwareVersion": "1.0",
+                "datePublished": "2025-02-04",
+                "inLanguage": ["en", "de", "uk", "es", "it", "cs", "pl", "fr"],
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "seller": {
+                        "@id": "https://videoslicer.app/#organization"
+                    }
+                },
+                "downloadUrl": "build/VideoSlicer.dmg",
+                "fileFormat": "application/x-apple-diskimage",
+                "featureList": [
+                    "Drag and drop video file support",
+                    "Extracts first and last frames",
+                    "Full-resolution lossless PNG output",
+                    "Start and end frames for AI video generation",
+                    "Works with Sora, Kling, Wan, Veo workflows",
+                    "Video thumbnail and preview extraction",
+                    "No dependencies — no ffmpeg required",
+                    "Supports MP4, MOV, AVI, M2V formats",
+                    "Native macOS SwiftUI application",
+                    "Apple Silicon and Intel support",
+                    "Multilingual — 8 languages",
+                    "100% free — no ads, no subscriptions",
+                    "Works entirely offline",
+                    "No data collection — complete privacy"
+                ],
+                "keywords": "video frame extractor, extract frames from video mac, first frame last frame, AI video generation, extract frame for Sora, Kling start end frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor",
+                "creator": {
+                    "@id": "https://videoslicer.app/#organization"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://videoslicer.app/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What video formats are supported?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "VideoSlicer supports all major video formats including MP4, MOV, AVI, and M2V. It uses Apple's native AVFoundation framework, so any format playable on macOS is supported."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Where are the extracted frames saved?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Extracted frames are saved as PNG files in a folder next to the source video file. The folder contains first.png and last.png."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is VideoSlicer free?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, VideoSlicer is completely free. No ads, no subscriptions, no in-app purchases. It's a simple tool that does one thing well."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Does it work offline?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, VideoSlicer works entirely offline. It's a native macOS app that processes everything locally on your machine. No internet connection is required."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What macOS version is required?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "VideoSlicer requires macOS 14 (Sonoma) or later. It ships as a Universal Binary for both Apple Silicon and Intel Macs."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I use extracted frames with AI video generators?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. VideoSlicer is perfect for extracting start and end keyframes for AI video generation tools like Sora, Kling, Wan, Veo, and others. Extract the first or last frame from an existing clip, then use it as an input image for image-to-video or frame interpolation workflows."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is my video data sent anywhere?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. VideoSlicer processes all videos locally on your Mac. No data is uploaded, no analytics are collected, and no network requests are made. Your files stay on your machine."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Do I need ffmpeg or any command-line tools?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. VideoSlicer is a native macOS app built with Apple's AVFoundation framework. There's nothing to install — no ffmpeg, no Homebrew, no terminal commands. Just drag and drop."
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "HowTo",
+                "@id": "https://videoslicer.app/#howto",
+                "name": "How to Extract Frames from a Video with VideoSlicer",
+                "description": "Extract the first and last frames from any video in 3 simple steps.",
+                "step": [
+                    {
+                        "@type": "HowToStep",
+                        "position": 1,
+                        "name": "Drop Your Video",
+                        "text": "Drag and drop any video file onto the VideoSlicer window, or use File > Open (Cmd+O) to browse."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 2,
+                        "name": "Extract Frames",
+                        "text": "VideoSlicer automatically extracts the first and last frames at full resolution using Apple's native AVFoundation."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 3,
+                        "name": "Get Your PNGs",
+                        "text": "Two lossless PNG files are saved in a folder right next to your original video file. Done."
+                    }
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://videoslicer.app/#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://videoslicer.app/"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <div class="theme-toggle">
+        <div class="theme-toggle-group" role="radiogroup" aria-label="Theme">
+            <button type="button" data-theme-value="light" role="radio" aria-checked="false" aria-label="Light theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+            <button type="button" data-theme-value="dark" role="radio" aria-checked="false" aria-label="Dark theme"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+            <button type="button" data-theme-value="system" role="radio" aria-checked="true" aria-label="System theme"><svg class="icon-desktop" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg><svg class="icon-mobile" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg></button>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p>We use cookies for analytics to improve your experience. No personal data is collected.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="cookie-btn accept">Accept</button>
+                <button id="cookie-reject" class="cookie-btn reject">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Flying Emojis Background -->
+        <div class="flying-emojis" id="flyingEmojis" aria-hidden="true"></div>
+
+        <div class="hero-icon">
+            <img src="images/app-icon.webp" alt="VideoSlicer app icon" width="128" height="128">
+        </div>
+        <h1>Extract First & Last Frames from Any Video</h1>
+        <p class="tagline">Free video frame extractor for macOS. No ffmpeg. No fuss.</p>
+        <p class="hero-subtitle">Get start and end frames as full-resolution PNGs — perfect for AI video generation, thumbnails, and previews. Works with MP4, MOV, AVI, M2V.</p>
+
+        <div class="download-badge">
+            <a href="build/VideoSlicer.dmg" class="btn-download" id="download-btn" aria-label="Download VideoSlicer DMG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download for macOS
+            </a>
+        </div>
+        <p class="hero-note">Requires macOS 14 Sonoma or later &middot; Universal Binary (Apple Silicon + Intel)</p>
+    </section>
+
+    <!-- Flying Emojis Generator -->
+    <script>
+    (function(){
+        var container = document.getElementById("flyingEmojis");
+        var emojis = ["\uD83C\uDFAC","\uD83C\uDFA5","\uD83D\uDCF9","\uD83C\uDF9E\uFE0F","\uD83D\uDCFD\uFE0F","\uD83C\uDFA6","\u2702\uFE0F","\uD83D\uDCF8","\uD83C\uDFB5","\uD83D\uDCC0"];
+        var count = 18;
+        for (var i = 0; i < count; i++) {
+            var span = document.createElement("span");
+            span.className = "flying-emoji";
+            span.textContent = emojis[i % emojis.length];
+            span.style.left = Math.random() * 100 + "%";
+            span.style.animationDuration = (12 + Math.random() * 16) + "s";
+            span.style.animationDelay = (Math.random() * 18) + "s";
+            span.style.fontSize = (20 + Math.random() * 16) + "px";
+            container.appendChild(span);
+        }
+    })();
+    </script>
+
+    <!-- Icon tilt toward mouse -->
+    <script>
+    (function(){
+        var icon = document.querySelector('.hero-icon img');
+        var hero = document.querySelector('.hero');
+        var maxTilt = 20;
+        hero.addEventListener('mousemove', function(e) {
+            var rect = icon.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = (e.clientX - cx) / (window.innerWidth / 2);
+            var dy = (e.clientY - cy) / (window.innerHeight / 2);
+            icon.style.transform = 'rotateY(' + (dx * maxTilt) + 'deg) rotateX(' + (-dy * maxTilt) + 'deg)';
+        });
+        hero.addEventListener('mouseleave', function() {
+            icon.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    })();
+    </script>
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <p>Looking for a simple way to <strong>extract frames from a video</strong> on macOS? VideoSlicer is a <strong>free video frame extractor</strong> that pulls the <strong>first and last frames</strong> from any video file and saves them as full-resolution <strong>lossless PNG</strong> images. Perfect as <strong>start and end frames for AI video generation</strong> with tools like <strong>Sora, Kling, Wan, and Veo</strong> — or for creating <strong>video thumbnails</strong> and previews. No ffmpeg, no Homebrew, no command-line tools required. Just drag, drop, and done. Built with Apple's native AVFoundation framework, VideoSlicer supports <strong>MP4, MOV, AVI, M2V</strong>, and any other format macOS can play. 100% offline, 100% private, 100% free.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Everything You Need. Nothing You Don't.</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📦</div>
+                <h3>Drag & Drop</h3>
+                <p>Drop any video file onto the window and VideoSlicer gets straight to work. No menus, no settings, no learning curve.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎬</div>
+                <h3>First & Last Frame</h3>
+                <p>Automatically extracts both the very first and very last frames from your video in a single operation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📸</div>
+                <h3>Full Resolution PNG</h3>
+                <p>Frames are saved as lossless PNG files at the video's native resolution. No quality loss, no compression artifacts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚙️</div>
+                <h3>No Dependencies</h3>
+                <p>Built with Apple's native AVFoundation framework. No ffmpeg, no Homebrew packages, no command-line tools needed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎞️</div>
+                <h3>Multiple Formats</h3>
+                <p>Works with MP4, MOV, AVI, M2V, and any other video format supported natively by macOS.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <h3>AI Video Ready</h3>
+                <p>Extract start and end frames for AI video generation tools like Sora, Kling, Wan, and Veo. Get the exact keyframes you need for image-to-video workflows.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🖼️</div>
+                <h3>Thumbnails & Previews</h3>
+                <p>Grab the opening or closing frame for video thumbnails, previews, or social media posts. Full resolution, no quality loss.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎁</div>
+                <h3>100% Free</h3>
+                <p>No ads, no subscriptions, no in-app purchases, no accounts. Just a clean tool that respects your time and your Mac.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Drop Your Video</h3>
+                <p>Drag any video file onto the VideoSlicer window or use File > Open (Cmd+O).</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Extract Frames</h3>
+                <p>VideoSlicer instantly grabs the first and last frames at full resolution.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Get Your PNGs</h3>
+                <p>Two lossless PNG files appear right next to your original video. That's it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>What video formats are supported?</summary>
+                <p>VideoSlicer supports all major video formats including MP4, MOV, AVI, and M2V. It uses Apple's native AVFoundation framework, so any format that macOS can play is supported out of the box.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Where are the extracted frames saved?</summary>
+                <p>Extracted frames are saved as PNG files in a folder next to your source video. The folder contains first.png and last.png, making them easy to find.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Is VideoSlicer free?</summary>
+                <p>Yes, VideoSlicer is completely free with no catches. There are no ads, no subscriptions, no in-app purchases, and no account sign-ups. It is a simple, focused tool.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Does it work offline?</summary>
+                <p>Yes. VideoSlicer works entirely offline. It is a native macOS application that processes everything locally on your machine. No internet connection is ever required.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What macOS version is required?</summary>
+                <p>VideoSlicer requires macOS 14 (Sonoma) or later. It ships as a Universal Binary, so it runs natively on both Apple Silicon and Intel Macs.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I use extracted frames with AI video generators?</summary>
+                <p>Yes. VideoSlicer is perfect for extracting start and end keyframes for AI video generation tools like Sora, Kling, Wan, Veo, and others. Extract the first or last frame from an existing clip, then use it as an input image for image-to-video or frame interpolation workflows.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Is my video data sent anywhere?</summary>
+                <p>Absolutely not. VideoSlicer processes all videos locally on your Mac. No data is uploaded anywhere, no analytics are collected from the app, and no network requests are made. Your files never leave your machine.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Do I need ffmpeg or any command-line tools?</summary>
+                <p>No. VideoSlicer is a native macOS app built with Apple's AVFoundation framework. There's nothing to install — no ffmpeg, no Homebrew, no terminal commands. Just drag and drop.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Privacy Highlight -->
+    <section class="privacy-highlight">
+        <h2>Your Privacy Matters</h2>
+        <p>VideoSlicer works 100% offline. No accounts, no data collection, no network requests. All video processing happens locally on your Mac. Your files never leave your machine.</p>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="#" id="cookie-settings">Cookie Settings</a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> VideoSlicer. All rights reserved.</p>
+        <p class="powered-by">Powered by <a href="https://unibrix.com" target="_blank" rel="noopener">Unibrix</a></p>
+    </footer>
+
+    <script src="theme.js"></script>
+
+    <!-- Cookie Consent & Analytics Script -->
+    <script>
+    (function() {
+        const CONSENT_KEY = 'videoslicer_cookie_consent';
+        const GA_ID = 'G-V2DVS3WPLG';
+
+        function getConsent() {
+            return localStorage.getItem(CONSENT_KEY);
+        }
+
+        function setConsent(status) {
+            localStorage.setItem(CONSENT_KEY, status);
+        }
+
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            const script = document.createElement('script');
+            script.id = 'ga-script';
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(script);
+        }
+
+        function updateConsent(granted) {
+            if (granted) {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted'
+                });
+                loadGA();
+            } else {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied'
+                });
+            }
+        }
+
+        function showBanner(show) {
+            document.getElementById('cookie-banner').style.display = show ? 'flex' : 'none';
+        }
+
+        function init() {
+            const consent = getConsent();
+
+            if (consent === null) {
+                showBanner(true);
+            } else if (consent === 'accepted') {
+                updateConsent(true);
+            }
+        }
+
+        document.getElementById('cookie-accept').addEventListener('click', function() {
+            setConsent('accepted');
+            updateConsent(true);
+            showBanner(false);
+        });
+
+        document.getElementById('cookie-reject').addEventListener('click', function() {
+            setConsent('rejected');
+            updateConsent(false);
+            showBanner(false);
+        });
+
+        document.getElementById('cookie-settings').addEventListener('click', function(e) {
+            e.preventDefault();
+            showBanner(true);
+        });
+
+        // Track DMG downloads
+        document.getElementById('download-btn').addEventListener('click', function() {
+            gtag('event', 'download', {
+                'event_category': 'engagement',
+                'event_label': 'build/VideoSlicer.dmg',
+                'value': 1
+            });
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        init();
+    })();
+    </script>
+</body>
+</html>

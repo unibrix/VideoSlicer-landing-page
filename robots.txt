@@ -1,0 +1,27 @@
+# robots.txt for VideoSlicer
+# https://videoslicer.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://videoslicer.app/sitemap.xml
+
+# AI Crawlers - Welcome!
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
