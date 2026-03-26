@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoSlicer — Free Video Frame Extractor for macOS | First & Last Frame for AI Video</title>
-    <meta name="description" content="Free macOS video frame extractor. Extract first and last frames as PNG for AI video generation (Sora, Kling, Wan, Veo), thumbnails, and previews. No ffmpeg, no command line. Drag, drop, done.">
-    <meta name="keywords" content="video frame extractor, extract frames from video mac, first frame last frame, AI video generation, video to PNG, extract frame for Sora, Kling start end frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor, video screenshot mac, drag and drop frame extractor, image to video first frame, AI video keyframe">
+    <title>VideoSlicer — Free Video Frame Extractor & Grabber for macOS | Capture First & Last Frame for AI Video</title>
+    <meta name="description" content="Free macOS app to grab and extract first & last frames from any video as PNG. Capture stills for AI video generation (Sora, Kling, Wan, Veo, Runway, Luma), thumbnails, and previews. No ffmpeg, no subscription. Drag, drop, done.">
+    <meta name="keywords" content="video frame extractor, video frame grabber mac, extract frames from video mac, grab frame from video, capture still from video mac, video to image mac, video screenshot mac, first frame last frame, extract last frame video, AI video generation, video to PNG, extract frame for Sora, Kling start end frame, Runway Gen-4 start frame, Luma Dream Machine frame, Pika video frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor, drag and drop frame extractor, image to video first frame, AI video keyframe, frame grabber mac free, video still image mac, export frame to pictures alternative">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -41,8 +41,8 @@
     <link rel="canonical" href="https://videoslicer.app/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="VideoSlicer — Free Video Frame Extractor for macOS | AI Video Ready">
-    <meta property="og:description" content="Extract first & last frames from any video as PNG. Perfect for AI video generation (Sora, Kling, Wan), thumbnails, and previews. Free, no ffmpeg needed.">
+    <meta property="og:title" content="VideoSlicer — Free Video Frame Grabber & Extractor for macOS | AI Video Ready">
+    <meta property="og:description" content="Grab first & last frames from any video as PNG. Capture stills for AI video generation (Sora, Kling, Wan, Runway, Luma), thumbnails, and previews. Free, no ffmpeg needed.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://videoslicer.app/">
     <meta property="og:image" content="https://videoslicer.app/images/app-icon.png">
@@ -51,8 +51,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="VideoSlicer — Free Video Frame Extractor for macOS">
-    <meta name="twitter:description" content="Extract first & last frames as PNG for AI video generation, thumbnails, and previews. Free macOS app, no ffmpeg needed.">
+    <meta name="twitter:title" content="VideoSlicer — Free Video Frame Grabber & Extractor for macOS">
+    <meta name="twitter:description" content="Grab & capture first and last frames as PNG for AI video generation (Sora, Kling, Runway, Luma), thumbnails, and previews. Free macOS app, no ffmpeg needed.">
     <meta name="twitter:image" content="https://videoslicer.app/images/app-icon.png">
 
     <!-- Favicon -->
@@ -109,11 +109,12 @@
                 "@type": "SoftwareApplication",
                 "@id": "https://videoslicer.app/#app",
                 "name": "VideoSlicer",
-                "description": "Free macOS video frame extractor. Extract first and last frames from any video as full-resolution PNG images. Perfect for AI video generation (Sora, Kling, Wan, Veo), thumbnails, and previews. Native SwiftUI app — no ffmpeg, no command line needed.",
+                "description": "Free macOS video frame grabber and extractor. Grab and capture first and last frames from any video as full-resolution PNG images. Perfect for AI video generation (Sora, Kling, Wan, Veo, Runway, Luma Dream Machine, Pika), thumbnails, stills, and previews. Native SwiftUI app — no ffmpeg, no command line, no subscription.",
                 "applicationCategory": "MultimediaApplication",
                 "operatingSystem": "macOS 14.0+",
                 "softwareVersion": "1.0",
                 "datePublished": "2025-02-04",
+                "dateModified": "2026-03-27",
                 "inLanguage": ["en", "de", "uk", "es", "it", "cs", "pl", "fr"],
                 "offers": {
                     "@type": "Offer",
@@ -128,13 +129,14 @@
                 "fileFormat": "application/x-apple-diskimage",
                 "featureList": [
                     "Drag and drop video file support",
-                    "Extracts first and last frames",
+                    "Grabs and extracts first and last frames",
                     "Full-resolution lossless PNG output",
                     "Start and end frames for AI video generation",
-                    "Works with Sora, Kling, Wan, Veo workflows",
-                    "Video thumbnail and preview extraction",
+                    "Works with Sora, Kling, Wan, Veo, Runway, Luma Dream Machine, Pika workflows",
+                    "Video thumbnail, still, and preview extraction",
                     "No dependencies — no ffmpeg required",
                     "Supports MP4, MOV, AVI, M2V formats",
+                    "Better alternative to Apple Photos Export Frame to Pictures",
                     "Native macOS SwiftUI application",
                     "Apple Silicon and Intel support",
                     "Multilingual — 8 languages",
@@ -142,7 +144,7 @@
                     "Works entirely offline",
                     "No data collection — complete privacy"
                 ],
-                "keywords": "video frame extractor, extract frames from video mac, first frame last frame, AI video generation, extract frame for Sora, Kling start end frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor",
+                "keywords": "video frame extractor, video frame grabber mac, grab frame from video, capture still from video mac, video to image mac, extract frames from video mac, first frame last frame, extract last frame video, AI video generation, extract frame for Sora, Kling start end frame, Runway start frame, Luma Dream Machine frame, video keyframe extractor, free video frame extractor mac, extract frames without ffmpeg, video thumbnail extractor, video screenshot mac, frame grabber mac free",
                 "creator": {
                     "@id": "https://videoslicer.app/#organization"
                 }
@@ -214,6 +216,22 @@
                             "@type": "Answer",
                             "text": "No. VideoSlicer is a native macOS app built with Apple's AVFoundation framework. There's nothing to install — no ffmpeg, no Homebrew, no terminal commands. Just drag and drop."
                         }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How is this different from Apple Photos Export Frame to Pictures?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Apple Photos' built-in Export Frame to Pictures is often greyed out, doesn't work with HEVC videos, and only exports TIFF format to a hard-to-find folder. VideoSlicer works with any video format, exports lossless PNG, and saves frames right next to your video file. No workarounds needed."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I extract the last frame to extend an AI video?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. VideoSlicer is designed for exactly this workflow. Extract the last frame from your AI-generated clip, then use it as the starting image for your next generation in Sora, Kling, Runway, Luma Dream Machine, Pika, or any image-to-video tool. This creates seamless video extensions."
+                        }
                     }
                 ]
             },
@@ -242,6 +260,21 @@
                         "text": "Two lossless PNG files are saved in a folder right next to your original video file. Done."
                     }
                 ]
+            },
+            {
+                "@type": "WebPage",
+                "@id": "https://videoslicer.app/#webpage",
+                "url": "https://videoslicer.app/",
+                "name": "VideoSlicer — Free Video Frame Grabber & Extractor for macOS",
+                "description": "Free macOS app to grab and capture first & last frames from any video as PNG. Perfect for AI video generation, thumbnails, and previews.",
+                "datePublished": "2025-02-04",
+                "dateModified": "2026-03-27",
+                "isPartOf": {
+                    "@id": "https://videoslicer.app/#website"
+                },
+                "about": {
+                    "@id": "https://videoslicer.app/#app"
+                }
             },
             {
                 "@type": "BreadcrumbList",
@@ -288,9 +321,9 @@
         <div class="hero-icon">
             <img src="images/app-icon.webp" alt="VideoSlicer app icon" width="128" height="128">
         </div>
-        <h1>Extract First & Last Frames from Any Video</h1>
-        <p class="tagline">Free video frame extractor for macOS. No ffmpeg. No fuss.</p>
-        <p class="hero-subtitle">Get start and end frames as full-resolution PNGs — perfect for AI video generation, thumbnails, and previews. Works with MP4, MOV, AVI, M2V.</p>
+        <h1>Grab First & Last Frames from Any Video</h1>
+        <p class="tagline">Free video frame grabber & extractor for macOS. No ffmpeg. No fuss.</p>
+        <p class="hero-subtitle">Capture start and end frames as full-resolution PNGs — perfect for AI video generation (Sora, Kling, Runway, Luma), thumbnails, and previews. Works with MP4, MOV, AVI, M2V.</p>
 
         <div class="download-badge">
             <a href="build/VideoSlicer.dmg" class="btn-download" id="download-btn" aria-label="Download VideoSlicer DMG">
@@ -342,7 +375,7 @@
 
     <!-- Intro Section -->
     <section class="intro">
-        <p>Looking for a simple way to <strong>extract frames from a video</strong> on macOS? VideoSlicer is a <strong>free video frame extractor</strong> that pulls the <strong>first and last frames</strong> from any video file and saves them as full-resolution <strong>lossless PNG</strong> images. Perfect as <strong>start and end frames for AI video generation</strong> with tools like <strong>Sora, Kling, Wan, and Veo</strong> — or for creating <strong>video thumbnails</strong> and previews. No ffmpeg, no Homebrew, no command-line tools required. Just drag, drop, and done. Built with Apple's native AVFoundation framework, VideoSlicer supports <strong>MP4, MOV, AVI, M2V</strong>, and any other format macOS can play. 100% offline, 100% private, 100% free.</p>
+        <p>Looking for a simple way to <strong>grab frames from a video</strong> on macOS? VideoSlicer is a <strong>free video frame grabber and extractor</strong> that captures the <strong>first and last frames</strong> from any video file and saves them as full-resolution <strong>lossless PNG</strong> images. Perfect as <strong>start and end frames for AI video generation</strong> with tools like <strong>Sora, Kling, Wan, Veo, Runway, Luma Dream Machine, and Pika</strong> — or for creating <strong>video thumbnails</strong>, stills, and previews. A better alternative to Apple Photos' "Export Frame to Pictures" — no ffmpeg, no Homebrew, no command-line tools, no subscription. Just drag, drop, and done. Built with Apple's native AVFoundation framework, VideoSlicer supports <strong>MP4, MOV, AVI, M2V</strong>, and any other format macOS can play. <strong>Capture stills from video</strong> — 100% offline, 100% private, 100% free.</p>
     </section>
 
     <!-- Features Section -->
@@ -377,12 +410,12 @@
             <div class="feature-card">
                 <div class="icon">🤖</div>
                 <h3>AI Video Ready</h3>
-                <p>Extract start and end frames for AI video generation tools like Sora, Kling, Wan, and Veo. Get the exact keyframes you need for image-to-video workflows.</p>
+                <p>Grab start and end frames for AI video generation tools like Sora, Kling, Wan, Veo, Runway, Luma Dream Machine, and Pika. Get the exact keyframes you need for image-to-video and video extension workflows.</p>
             </div>
             <div class="feature-card">
                 <div class="icon">🖼️</div>
-                <h3>Thumbnails & Previews</h3>
-                <p>Grab the opening or closing frame for video thumbnails, previews, or social media posts. Full resolution, no quality loss.</p>
+                <h3>Thumbnails, Stills & Previews</h3>
+                <p>Capture the opening or closing frame as a still image for video thumbnails, previews, or social media posts. Full resolution, no quality loss.</p>
             </div>
             <div class="feature-card">
                 <div class="icon">🎁</div>
@@ -450,6 +483,14 @@
                 <summary>Do I need ffmpeg or any command-line tools?</summary>
                 <p>No. VideoSlicer is a native macOS app built with Apple's AVFoundation framework. There's nothing to install — no ffmpeg, no Homebrew, no terminal commands. Just drag and drop.</p>
             </details>
+            <details class="faq-item">
+                <summary>How is this different from Apple Photos "Export Frame to Pictures"?</summary>
+                <p>Apple Photos' built-in "Export Frame to Pictures" is often greyed out, doesn't work with HEVC videos, and only exports TIFF format to a hard-to-find folder. VideoSlicer works with any video format, exports lossless PNG, and saves frames right next to your video file. No workarounds needed.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I extract the last frame to extend an AI video?</summary>
+                <p>Yes. VideoSlicer is designed for exactly this workflow. Extract the last frame from your AI-generated clip, then use it as the starting image for your next generation in Sora, Kling, Runway, Luma Dream Machine, Pika, or any image-to-video tool. This creates seamless video extensions.</p>
+            </details>
         </div>
     </section>
 
@@ -467,7 +508,7 @@
             <a href="privacy.html">Privacy Policy</a>
             <a href="#" id="cookie-settings">Cookie Settings</a>
         </div>
-        <p class="copyright">&copy; <span id="year"></span> VideoSlicer. All rights reserved.</p>
+        <p class="copyright">&copy; <span id="year"></span> VideoSlicer. All rights reserved. &middot; Last updated March 2026</p>
         <p class="powered-by">Powered by <a href="https://unibrix.com" target="_blank" rel="noopener">Unibrix</a></p>
     </footer>
 
